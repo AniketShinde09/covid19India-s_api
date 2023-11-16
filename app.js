@@ -145,18 +145,20 @@ app.put("/districts/:districtId/", async (request, response) => {
   const { districtId } = request.params;
   const { districtName, stateId, cases, cured, active, deaths } = request.body;
   const updateDistrictQuery = `
-  UPDATE
-  district
-  SET 
-  district_name= '${districtName}',
-  state_id = ${stateId},
-  cases = ${cases},
-  active = ${active},
-  deaths = ${deaths}
-  WHERE
-  district_id = ${districtId};`;
+    UPDATE
+    district
+    SET
+    district_name = '${districtName}',
+    state_id = ${stateId},
+    cases = ${cases},
+    cured = ${cured},
+    active = ${active},
+    deaths = ${deaths}
+    WHERE
+    district_id = ${districtId};
+  `;
   await database.run(updateDistrictQuery);
-  response.send("District Successfully Added");
+  response.send("District Details Updated");
 });
 
 const reportSnakeCaseToCamelCase = (stateReport) => {
